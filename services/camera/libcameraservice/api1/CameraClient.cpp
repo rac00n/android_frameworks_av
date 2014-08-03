@@ -1009,7 +1009,7 @@ void CameraClient::handleCompressedBurstPicture(const sp<IMemory>& mem) {
     // get called only once. When burst finishes this message will get automatically
     // disabled in the respective call for restarting the preview.
 
-    sp<ICameraClient> c = mCameraClient;
+    sp<ICameraClient> c = mRemoteCallback;
     mLock.unlock();
     if (c != 0) {
         c->dataCallback(CAMERA_MSG_COMPRESSED_IMAGE, mem, NULL);

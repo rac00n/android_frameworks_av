@@ -1607,11 +1607,13 @@ void Camera2Client::notifyAutoFocus(uint8_t newState, int triggerId) {
         }
     }
     if (sendMovingMessage) {
+#ifndef OMAP_ICS_CAMERA
         SharedCameraCallbacks::Lock l(mSharedCameraCallbacks);
         if (l.mRemoteCallback != 0) {
             l.mRemoteCallback->notifyCallback(CAMERA_MSG_FOCUS_MOVE,
                     afInMotion ? 1 : 0, 0);
         }
+#endif
     }
     if (sendCompletedMessage) {
         ATRACE_ASYNC_END(kAutofocusLabel, triggerId);
